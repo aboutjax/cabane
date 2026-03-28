@@ -96,9 +96,11 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
               <p className="text-sm capitalize">
                 {project.projectStatus === 'inProgress'
                   ? 'In Progress'
-                  : project.projectStatus === 'onHold'
-                    ? 'On Hold'
-                    : 'Completed'}
+                  : project.projectStatus === 'speculative'
+                    ? 'Speculative'
+                    : project.projectStatus === 'competition'
+                      ? 'Competition'
+                      : 'Completed'}
               </p>
             </div>
           )}
