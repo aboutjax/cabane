@@ -132,6 +132,37 @@ export const Projects: CollectionConfig<'projects'> = {
               },
             },
             {
+              name: 'date',
+              type: 'date',
+              admin: {
+                date: {
+                  pickerAppearance: 'dayOnly',
+                  displayFormat: 'd MMMM yyyy',
+                },
+                position: 'sidebar',
+              },
+            },
+            {
+              name: 'location',
+              type: 'text',
+              admin: {
+                position: 'sidebar',
+              },
+            },
+            {
+              name: 'projectStatus',
+              type: 'select',
+              options: [
+                { label: 'In Progress', value: 'inProgress' },
+                { label: 'Completed', value: 'completed' },
+                { label: 'On Hold', value: 'onHold' },
+              ],
+              defaultValue: 'inProgress',
+              admin: {
+                position: 'sidebar',
+              },
+            },
+            {
               name: 'description',
               type: 'textarea',
             },

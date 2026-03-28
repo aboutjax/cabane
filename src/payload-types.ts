@@ -814,6 +814,9 @@ export interface Project {
     | null;
   client?: string | null;
   year?: number | null;
+  date?: string | null;
+  location?: string | null;
+  projectStatus?: ('inProgress' | 'completed' | 'onHold') | null;
   description?: string | null;
   categories?: (number | Category)[] | null;
   meta?: {
@@ -1292,6 +1295,9 @@ export interface ProjectsSelect<T extends boolean = true> {
       };
   client?: T;
   year?: T;
+  date?: T;
+  location?: T;
+  projectStatus?: T;
   description?: T;
   categories?: T;
   meta?:
