@@ -44,7 +44,7 @@ export const Projects: CollectionConfig<'projects'> = {
     },
   },
   admin: {
-    defaultColumns: ['title', 'client', 'year', 'updatedAt'],
+    defaultColumns: ['title', 'client', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) =>
         generatePreviewPath({
@@ -120,13 +120,6 @@ export const Projects: CollectionConfig<'projects'> = {
             {
               name: 'client',
               type: 'text',
-              admin: {
-                position: 'sidebar',
-              },
-            },
-            {
-              name: 'year',
-              type: 'number',
               admin: {
                 position: 'sidebar',
               },

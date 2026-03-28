@@ -4,14 +4,13 @@ import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
+import { cache } from 'react'
 import RichText from '@/components/RichText'
 import Image from 'next/image'
 
-import type { Project, Media as MediaType } from '@/payload-types'
+import type { Media as MediaType } from '@/payload-types'
 
 import { generateMeta } from '@/utilities/generateMeta'
-import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
 export async function generateStaticParams() {
@@ -48,63 +47,108 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
   const featuredImage = project.featuredImage as MediaType | undefined
 
   return (
-    <article className="pt-16 pb-16">
-      <PageClient />
-
+    <article>
       <PayloadRedirects disableNotFound url={url} />
 
       {draft && <LivePreviewListener />}
 
-      <div className="container">
-        <div className="max-w-[48rem] mx-auto mb-8">
-          <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
-          <div className="flex gap-4 text-sm text-gray-500 mb-8">
-            {project.client && <span>{project.client}</span>}
-            {project.year && <span>{project.year}</span>}
-          </div>
-          {project.description && (
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">{project.description}</p>
-          )}
-        </div>
+      {/* Project Header */}
+      <div className="px-6 md:px-10 pt-16 pb-12 md:pt-24 md:pb-16">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-10">
+          {project.title}
+        </h1>
 
-        {featuredImage && typeof featuredImage !== 'string' && featuredImage.url && (
-          <div className="relative aspect-[16/9] overflow-hidden mb-12">
-            <Image
-              src={featuredImage.url}
-              alt={featuredImage.alt || project.title}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+        {project.description && (
+          <p className="text-lg md:text-xl leading-relaxed text-muted-foreground max-w-2xl mb-12">
+            {project.description}
+          </p>
         )}
 
-        <div className="max-w-[48rem] mx-auto">
-          {project.content && (
-            <RichText className="mb-12" data={project.content} enableGutter={false} />
+        {/* Metadata Table */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 border-t border-border pt-8">
+          {project.client && (
+            <div>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Client</p>
+              <p className="text-sm">{project.client}</p>
+            </div>
           )}
-
-          {project.gallery && project.gallery.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-              {project.gallery.map((item, index) => {
-                const image = item.image as MediaType | undefined
-                if (!image || typeof image === 'string' || !image.url) return null
-
-                return (
-                  <div key={item.id || index} className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={image.url}
-                      alt={image.alt || `${project.title} gallery image ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                )
-              })}
+          {project.date && (
+            <div>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
+                Project date
+              </p>
+              <p className="text-sm">
+                {`${new Date(project.date).toLocaleDateString('en-US', { month: 'long' })} / ${new Date(project.date).getFullYear()}`}
+              </p>
+            </div>
+          )}
+          {project.location && (
+            <div>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
+                Location
+              </p>
+              <p className="text-sm">{project.location}</p>
+            </div>
+          )}
+          {project.projectStatus && (
+            <div>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Status</p>
+              <p className="text-sm capitalize">
+                {project.projectStatus === 'inProgress'
+                  ? 'In Progress'
+                  : project.projectStatus === 'onHold'
+                    ? 'On Hold'
+                    : 'Completed'}
+              </p>
             </div>
           )}
         </div>
       </div>
+
+      {/* Featured Image - Full Bleed */}
+      {featuredImage && typeof featuredImage !== 'string' && featuredImage.url && (
+        <div className="relative w-full aspect-video overflow-hidden">
+          <Image
+            src={featuredImage.url}
+            alt={featuredImage.alt || project.title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+        </div>
+      )}
+
+      {/* Content */}
+      <div className="px-6 md:px-10">
+        <div className="max-w-3xl mx-auto py-16">
+          {project.content && (
+            <RichText className="mb-16" data={project.content} enableGutter={false} />
+          )}
+        </div>
+      </div>
+
+      {/* Gallery - Full Bleed */}
+      {project.gallery && project.gallery.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+          {project.gallery.map((item, index) => {
+            const image = item.image as MediaType | undefined
+            if (!image || typeof image === 'string' || !image.url) return null
+
+            return (
+              <div key={item.id || index} className="relative aspect-4/3 overflow-hidden">
+                <Image
+                  src={image.url}
+                  alt={image.alt || `${project.title} gallery image ${index + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+            )
+          })}
+        </div>
+      )}
     </article>
   )
 }
