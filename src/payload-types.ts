@@ -621,7 +621,7 @@ export interface Project {
   client?: string | null;
   date?: string | null;
   location?: string | null;
-  projectStatus?: ('inProgress' | 'completed' | 'onHold') | null;
+  projectStatus?: ('inProgress' | 'completed' | 'speculative' | 'competition') | null;
   description?: string | null;
   categories?: (number | Category)[] | null;
   meta?: {

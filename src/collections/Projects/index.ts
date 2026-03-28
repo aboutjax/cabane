@@ -148,7 +148,8 @@ export const Projects: CollectionConfig<'projects'> = {
               options: [
                 { label: 'In Progress', value: 'inProgress' },
                 { label: 'Completed', value: 'completed' },
-                { label: 'On Hold', value: 'onHold' },
+                { label: 'Speculative', value: 'speculative' },
+                { label: 'Competition', value: 'competition' },
               ],
               defaultValue: 'inProgress',
               admin: {
