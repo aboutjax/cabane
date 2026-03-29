@@ -19,6 +19,7 @@ export default async function Page() {
     depth: 1,
     limit: 50,
     overrideAccess: false,
+    sort: '-date',
     select: {
       title: true,
       slug: true,
