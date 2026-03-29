@@ -38,10 +38,7 @@ export const Card: React.FC<{
   const href = `/${relationTo}/${slug}`
 
   return (
-    <article
-      className={cn('overflow-hidden bg-card hover:cursor-pointer', className)}
-      ref={card.ref}
-    >
+    <article className={cn('overflow-hidden hover:cursor-pointer', className)} ref={card.ref}>
       <div className="relative w-full aspect-square">
         {!featuredImage && <div className="">No image</div>}
         {featuredImage && typeof featuredImage !== 'number' && (
