@@ -42,7 +42,6 @@ export default async function Page() {
         <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-2 md:grid-cols-3 md:gap-x-5 md:gap-y-14 xl:grid-cols-5 xl:gap-x-6 xl:gap-y-16">
           {projects.docs.map((project) => {
             const image = project.featuredImage as MediaType | undefined
-            const isUnderConstruction = project.projectStatus === 'inProgress'
 
             const cardContent = (
               <>
@@ -52,18 +51,11 @@ export default async function Page() {
                       src={image.url}
                       alt={image.alt || project.title}
                       fill
-                      className={cn(
-                        'object-cover transition-transform duration-500 ease-out',
-                        !isUnderConstruction && 'group-hover:scale-[1.03]',
-                      )}
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEyNSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNlNWU1ZTUiLz48L3N2Zz4="
+                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
+                      className={cn('object-cover transition-transform duration-500 ease-out')}
                     />
-                    {isUnderConstruction && (
-                      <div className="absolute inset-0 flex items-end p-3">
-                        <span className="text-[10px] uppercase tracking-widest text-white/80 bg-black/40 px-2.5 py-1">
-                          Under Construction
-                        </span>
-                      </div>
-                    )}
                   </div>
                 )}
                 <div className="mt-3">
@@ -75,23 +67,8 @@ export default async function Page() {
               </>
             )
 
-            if (isUnderConstruction) {
-              return (
-                <div
-                  key={project.slug}
-                  className="opacity-75 cursor-default"
-                >
-                  {cardContent}
-                </div>
-              )
-            }
-
             return (
-              <Link
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                className="group block"
-              >
+              <Link key={project.slug} href={`/projects/${project.slug}`} className="group block">
                 {cardContent}
               </Link>
             )
