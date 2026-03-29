@@ -4,30 +4,31 @@ import React from 'react'
 
 import type { Footer } from '@/payload-types'
 
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
-import { CMSLink } from '@/components/Link'
-import { Logo } from '@/components/Logo/Logo'
-
 export async function Footer() {
-  const footerData: Footer = await getCachedGlobal('footer', 1)()
-
-  const navItems = footerData?.navItems || []
-
   return (
-    <footer className="mt-auto border-t border-border bg-black dark:bg-card text-white">
-      <div className="px-6 md:px-10 py-8 gap-8 flex flex-col md:flex-row md:justify-between">
-        <Link className="flex items-center text-white text-lg tracking-tight" href="/">
-          Cabane
-        </Link>
-
-        <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
-          <ThemeSelector />
-          <nav className="flex flex-col md:flex-row gap-4">
-            {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
-            })}
-          </nav>
+    <footer className="mt-auto bg-background text-foreground text-sm">
+      <div className="px-6 md:px-10 py-4 flex flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left md:gap-x-8">
+        <span className="whitespace-nowrap">Cabane LTD</span>
+        <a
+          href="https://www.instagram.com/cabanenyc/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          Instagram
+        </a>
+        <div>
+          <a href="mailto:contact@cabane.nyc" className="hover:underline">
+            contact@cabane.nyc
+          </a>
         </div>
+        <span>+19177140148</span>
+        <div>
+          <span>228 Park Ave S. PMB 870455. New York, NY 10003</span>
+        </div>
+        <Link href="/privacy-policy" className="hover:underline">
+          Privacy Policy
+        </Link>
       </div>
     </footer>
   )
