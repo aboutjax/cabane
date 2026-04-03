@@ -66,8 +66,8 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   if (!src && resource && typeof resource === 'object') {
     const { alt: altFromResource, height: fullHeight, url, width: fullWidth } = resource
 
-    width = fullWidth!
-    height = fullHeight!
+    width = fullWidth || undefined
+    height = fullHeight || undefined
     alt = altFromResource || ''
 
     const cacheTag = resource.updatedAt
@@ -85,12 +85,12 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         .join(', ')
 
   return (
-    <picture className={cn(pictureClassName)}>
+    <picture className={cn(pictureClassName, { 'relative w-full aspect-video': !fill && (!width || !height) })}>
       <NextImage
         alt={alt || ''}
         className={cn(imgClassName)}
-        fill={fill}
-        height={!fill ? height : undefined}
+        fill={fill || (!width || !height)}
+        height={!fill && width && height ? height : undefined}
         placeholder="blur"
         blurDataURL={placeholderBlur}
         priority={priority}
@@ -98,7 +98,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         loading={loading}
         sizes={sizes}
         src={src}
-        width={!fill ? width : undefined}
+        width={!fill && width && height ? width : undefined}
       />
     </picture>
   )

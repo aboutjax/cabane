@@ -4,7 +4,6 @@ import { usePathname } from 'next/navigation'
 import React from 'react'
 
 const navLinks = [
-  { label: 'Home', href: '/' },
   { label: 'Projects', href: '/projects' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
@@ -12,14 +11,25 @@ const navLinks = [
 
 export const HeaderNav: React.FC = () => {
   const pathname = usePathname()
+  const headerRef = React.useRef<HTMLElement>(null)
+
+  React.useEffect(() => {
+    if (headerRef.current) {
+      const height = headerRef.current.getBoundingClientRect().height
+      document.documentElement.style.setProperty('--header-nav-height', `${height}px`)
+    }
+  }, [])
 
   return (
-    <header className="sticky top-0 z-50 w-full mix-blend-difference text-white">
+    <header
+      ref={headerRef}
+      className="fixed top-(--admin-bar-height,0px) z-50 w-full mix-blend-difference text-white"
+    >
       <div className="flex justify-between items-center px-6 md:px-10 py-5">
         <Link href="/" className="text-2xl tracking-tight font-medium ">
           Cabane
         </Link>
-        <nav className="flex gap-6 items-center text-sm">
+        <nav className="w-full gap-[10%] flex-1 flex justify-end items-center text-sm">
           {navLinks.map(({ label, href }) => (
             <Link
               key={href}
