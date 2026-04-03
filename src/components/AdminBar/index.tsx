@@ -37,6 +37,7 @@ export const AdminBar: React.FC<{
   const { adminBarProps } = props || {}
   const segments = useSelectedLayoutSegments()
   const [show, setShow] = useState(false)
+  const barRef = React.useRef<HTMLDivElement>(null)
   const collection = (
     collectionLabels[segments?.[1] as keyof typeof collectionLabels] ? segments[1] : 'pages'
   ) as keyof typeof collectionLabels
@@ -46,18 +47,31 @@ export const AdminBar: React.FC<{
     setShow(Boolean(user?.id))
   }, [])
 
+  React.useEffect(() => {
+    if (show && barRef.current) {
+      document.documentElement.style.setProperty('--admin-bar-height', '32px')
+    } else {
+      document.documentElement.style.setProperty('--admin-bar-height', '0px')
+    }
+  }, [show])
+
   return (
     <div
-      className={cn(baseClass, 'z-99 px-6 py-2 bg-black text-white', {
-        block: show,
-        hidden: !show,
-      })}
+      ref={barRef}
+      className={cn(
+        baseClass,
+        'sticky flex items-center justify-center top-0 z-99 px-6 py-2 bg-black text-white h-8',
+        {
+          flex: show,
+          hidden: !show,
+        },
+      )}
     >
       <PayloadAdminBar
         {...adminBarProps}
         className="py-2 text-white"
         classNames={{
-          controls: 'font-medium text-white',
+          controls: 'text-white',
           logo: 'text-white',
           user: 'text-white',
         }}

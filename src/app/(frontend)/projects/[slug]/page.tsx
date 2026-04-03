@@ -122,13 +122,15 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
       )}
 
       {/* Content */}
-      <div className="px-6 md:px-10">
-        <div className="max-w-3xl mx-auto py-16">
-          {project.content && (
-            <RichText className="mb-16" data={project.content} enableGutter={false} />
-          )}
+      {project.content && (
+        <div className="px-6 md:px-10">
+          <div className="max-w-3xl mx-auto py-16">
+            {project.content && (
+              <RichText className="mb-16" data={project.content} enableGutter={false} />
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Gallery - Full Bleed */}
       {project.gallery && project.gallery.length > 0 && (
