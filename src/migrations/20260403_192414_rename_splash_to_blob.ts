@@ -1,9 +1,11 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
-  // Step 1: Convert enum columns to text so we can safely manipulate values
+  // Step 1: Drop defaults and convert enum columns to text
   await db.execute(sql`
+  ALTER TABLE "pages" ALTER COLUMN "hero_type" DROP DEFAULT;
   ALTER TABLE "pages" ALTER COLUMN "hero_type" SET DATA TYPE text;
+  ALTER TABLE "_pages_v" ALTER COLUMN "version_hero_type" DROP DEFAULT;
   ALTER TABLE "_pages_v" ALTER COLUMN "version_hero_type" SET DATA TYPE text;`)
 
   // Step 2: Rename splash → blob and drop old enum types
