@@ -38,8 +38,8 @@ export const Card: React.FC<{
   const href = `/${relationTo}/${slug}`
 
   return (
-    <article className={cn('overflow-hidden hover:cursor-pointer', className)} ref={card.ref}>
-      <div className="relative w-full aspect-square">
+    <article className={cn('group overflow-hidden hover:cursor-pointer', className)} ref={card.ref}>
+      <div className="relative w-full aspect-square  overflow-clip">
         {!featuredImage && <div className="">No image</div>}
         {featuredImage && typeof featuredImage !== 'number' && (
           <Media
@@ -50,7 +50,7 @@ export const Card: React.FC<{
               height: featuredImage.sizes?.square?.height || featuredImage.height,
             }}
             fill
-            imgClassName="object-cover"
+            imgClassName="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
             size="33vw"
           />
         )}
@@ -65,7 +65,28 @@ export const Card: React.FC<{
             </h3>
           </div>
         )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+        {description && (
+          <div className="mt-2">
+            {description && <p className="line-clamp-2">{sanitizedDescription}</p>}
+          </div>
+        )}
+        {hasCategories && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {categories?.map((category) => {
+              if (typeof category === 'object' && category !== null) {
+                return (
+                  <span
+                    key={category.id}
+                    className="font-mono text-xs text-muted-foreground uppercase mt-2"
+                  >
+                    {category.title}
+                  </span>
+                )
+              }
+              return null
+            })}
+          </div>
+        )}
       </div>
     </article>
   )

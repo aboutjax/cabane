@@ -65,21 +65,35 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
         )}
 
         {/* Metadata Table */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 border-t border-border pt-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-x-8 gap-y-6 border-t border-border pt-8">
+          {project.date && (
+            <div>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Year</p>
+              <p className="text-sm">{new Date(project.date).getFullYear()}</p>
+            </div>
+          )}
           {project.client && (
             <div>
               <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Client</p>
               <p className="text-sm">{project.client}</p>
             </div>
           )}
-          {project.date && (
+          {project.categories && project.categories.length > 0 && (
             <div>
               <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
-                Project date
+                Categories
               </p>
-              <p className="text-sm">
-                {`${new Date(project.date).toLocaleDateString('en-US', { month: 'long' })} / ${new Date(project.date).getFullYear()}`}
-              </p>
+              <div className="flex flex-wrap gap-2">
+                {project.categories.map((cat) => {
+                  const category = typeof cat === 'object' ? cat : null
+                  if (!category) return null
+                  return (
+                    <span key={category.id} className="text-sm">
+                      {category.title}
+                    </span>
+                  )
+                })}
+              </div>
             </div>
           )}
           {project.location && (
@@ -134,7 +148,7 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
 
       {/* Gallery - Full Bleed */}
       {project.gallery && project.gallery.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px">
           {project.gallery.map((item, index) => {
             const image = item.image as MediaType | undefined
             if (!image || typeof image === 'string' || !image.url) return null
