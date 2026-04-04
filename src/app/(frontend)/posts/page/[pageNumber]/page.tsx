@@ -1,5 +1,6 @@
 import type { Metadata } from 'next/types'
 
+import { SITE_TITLE } from '@/siteConfig'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
@@ -63,7 +64,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { pageNumber } = await paramsPromise
   return {
-    title: `Payload Website Template Posts Page ${pageNumber || ''}`,
+    title: `${SITE_TITLE} — Posts Page ${pageNumber || ''}`,
   }
 }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next/types'
 
+import { SITE_TITLE } from '@/siteConfig'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
 import { Pagination } from '@/components/Pagination'
@@ -56,6 +57,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Posts`,
+    title: SITE_TITLE,
   }
 }
