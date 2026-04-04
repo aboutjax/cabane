@@ -53,7 +53,7 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
       {draft && <LivePreviewListener />}
 
       {/* Project Header */}
-      <div className="px-6 md:px-10 pt-16 pb-12 md:pt-24 md:pb-16">
+      <div className="pt-40 px-8 pb-8">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-10">
           {project.title}
         </h1>

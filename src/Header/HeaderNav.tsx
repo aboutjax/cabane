@@ -6,7 +6,6 @@ import React from 'react'
 const navLinks = [
   { label: 'Projects', href: '/projects' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
 ]
 
 export const HeaderNav: React.FC = () => {
@@ -23,7 +22,7 @@ export const HeaderNav: React.FC = () => {
   return (
     <header
       ref={headerRef}
-      className="fixed top-(--admin-bar-height,0px) z-50 w-full mix-blend-difference text-white"
+      className="fixed top-(--admin-bar-height,0px) z-50 w-full mix-blend-difference text-white animate-in fade-in duration-700 delay-[0.8s] fill-mode-backwards"
     >
       <div className="flex justify-between items-center px-6 md:px-10 py-5">
         <Link href="/" className="text-2xl tracking-tight font-medium ">

@@ -6,9 +6,9 @@ import type { Footer } from '@/payload-types'
 
 export async function Footer() {
   return (
-    <footer className="mt-auto bg-background text-foreground text-sm">
+    <footer className="mt-auto border-t border-t-foreground bg-background text-foreground text-sm">
       <div className="px-6 md:px-10 py-4 flex flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left md:gap-x-8">
-        <span className="whitespace-nowrap">Cabane LTD</span>
+        <span className="whitespace-nowrap">Cabane</span>
         <a
           href="https://www.instagram.com/cabanenyc/"
           target="_blank"
