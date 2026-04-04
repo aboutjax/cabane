@@ -8,6 +8,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { linkGroup } from '@/fields/linkGroup'
+import { shaderFields } from './Shader/config'
 
 export const hero: Field = {
   name: 'hero',
@@ -39,6 +40,10 @@ export const hero: Field = {
           label: 'Blob',
           value: 'blob',
         },
+        {
+          label: 'Shader',
+          value: 'shader',
+        },
       ],
       required: true,
     },
@@ -66,11 +71,13 @@ export const hero: Field = {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact', 'blob'].includes(type),
+        condition: (_, { type } = {}) =>
+          ['highImpact', 'mediumImpact', 'blob', 'shader'].includes(type),
       },
       relationTo: 'media',
       required: false,
     },
+    ...shaderFields,
   ],
   label: false,
 }

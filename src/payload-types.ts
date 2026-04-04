@@ -161,7 +161,7 @@ export interface Page {
   id: number;
   title: string;
   hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'blob';
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact' | 'blob' | 'shader';
     richText?: {
       root: {
         type: string;
@@ -202,6 +202,558 @@ export interface Page {
         }[]
       | null;
     media?: (number | null) | Media;
+    shaderType?:
+      | (
+          | 'meshGradient'
+          | 'smokeRing'
+          | 'neuroNoise'
+          | 'dotOrbit'
+          | 'dotGrid'
+          | 'simplexNoise'
+          | 'metaballs'
+          | 'waves'
+          | 'perlinNoise'
+          | 'voronoi'
+          | 'warp'
+          | 'godRays'
+          | 'spiral'
+          | 'swirl'
+          | 'dithering'
+          | 'grainGradient'
+          | 'pulsingBorder'
+          | 'colorPanels'
+          | 'staticMeshGradient'
+          | 'staticRadialGradient'
+          | 'paperTexture'
+          | 'flutedGlass'
+          | 'water'
+          | 'imageDithering'
+          | 'heatmap'
+          | 'liquidMetal'
+          | 'halftoneDots'
+          | 'halftoneCmyk'
+        )
+      | null;
+    /**
+     * Negative values reverse the animation. 0 = static.
+     */
+    shaderSpeed?: number | null;
+    shaderScale?: number | null;
+    shaderRotation?: number | null;
+    meshGradientColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    meshGradientDistortion?: number | null;
+    meshGradientSwirl?: number | null;
+    meshGradientGrainMixer?: number | null;
+    meshGradientGrainOverlay?: number | null;
+    smokeRingColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    smokeRingColorBack?: string | null;
+    smokeRingThickness?: number | null;
+    smokeRingRadius?: number | null;
+    smokeRingInnerShape?: number | null;
+    smokeRingNoiseIterations?: number | null;
+    smokeRingNoiseScale?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    neuroNoiseColorFront?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    neuroNoiseColorMid?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    neuroNoiseColorBack?: string | null;
+    neuroNoiseBrightness?: number | null;
+    neuroNoiseContrast?: number | null;
+    dotOrbitColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    dotOrbitColorBack?: string | null;
+    dotOrbitSize?: number | null;
+    dotOrbitSizeRange?: number | null;
+    dotOrbitSpreading?: number | null;
+    dotOrbitStepsPerColor?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    dotGridColorBack?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    dotGridColorFill?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    dotGridColorStroke?: string | null;
+    dotGridSize?: number | null;
+    dotGridGapX?: number | null;
+    dotGridGapY?: number | null;
+    dotGridStrokeWidth?: number | null;
+    dotGridSizeRange?: number | null;
+    dotGridOpacityRange?: number | null;
+    dotGridShape?: ('circle' | 'diamond' | 'square' | 'triangle') | null;
+    simplexNoiseColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    simplexNoiseStepsPerColor?: number | null;
+    simplexNoiseSoftness?: number | null;
+    metaballsColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    metaballsColorBack?: string | null;
+    metaballsCount?: number | null;
+    metaballsSize?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    wavesColorFront?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    wavesColorBack?: string | null;
+    wavesShape?: number | null;
+    wavesAmplitude?: number | null;
+    wavesFrequency?: number | null;
+    wavesSpacing?: number | null;
+    wavesProportion?: number | null;
+    wavesSoftness?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    perlinNoiseColorFront?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    perlinNoiseColorBack?: string | null;
+    perlinNoiseProportion?: number | null;
+    perlinNoiseSoftness?: number | null;
+    perlinNoiseOctaveCount?: number | null;
+    perlinNoisePersistence?: number | null;
+    perlinNoiseLacunarity?: number | null;
+    voronoiColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    voronoiStepsPerColor?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    voronoiColorGap?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    voronoiColorGlow?: string | null;
+    voronoiDistortion?: number | null;
+    voronoiGap?: number | null;
+    voronoiGlow?: number | null;
+    warpColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    warpProportion?: number | null;
+    warpSoftness?: number | null;
+    warpShape?: ('checks' | 'stripes' | 'edge') | null;
+    warpShapeScale?: number | null;
+    warpDistortion?: number | null;
+    warpSwirl?: number | null;
+    warpSwirlIterations?: number | null;
+    godRaysColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    godRaysColorBack?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    godRaysColorBloom?: string | null;
+    godRaysBloom?: number | null;
+    godRaysIntensity?: number | null;
+    godRaysDensity?: number | null;
+    godRaysSpotty?: number | null;
+    godRaysMidSize?: number | null;
+    godRaysMidIntensity?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    spiralColorFront?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    spiralColorBack?: string | null;
+    spiralDensity?: number | null;
+    spiralDistortion?: number | null;
+    spiralStrokeWidth?: number | null;
+    spiralStrokeTaper?: number | null;
+    spiralStrokeCap?: number | null;
+    spiralNoise?: number | null;
+    spiralNoiseFrequency?: number | null;
+    spiralSoftness?: number | null;
+    swirlColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    swirlColorBack?: string | null;
+    swirlBandCount?: number | null;
+    swirlTwist?: number | null;
+    swirlCenter?: number | null;
+    swirlProportion?: number | null;
+    swirlSoftness?: number | null;
+    swirlNoise?: number | null;
+    swirlNoiseFrequency?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    ditheringColorFront?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    ditheringColorBack?: string | null;
+    ditheringShape?: ('simplex' | 'warp' | 'dots' | 'wave' | 'ripple' | 'swirl' | 'sphere') | null;
+    ditheringType?: ('random' | '2x2' | '4x4' | '8x8') | null;
+    ditheringSize?: number | null;
+    grainGradientColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    grainGradientColorBack?: string | null;
+    grainGradientSoftness?: number | null;
+    grainGradientIntensity?: number | null;
+    grainGradientNoise?: number | null;
+    grainGradientShape?: ('wave' | 'dots' | 'truchet' | 'corners' | 'ripple' | 'blob' | 'sphere') | null;
+    pulsingBorderColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    pulsingBorderColorBack?: string | null;
+    pulsingBorderRoundness?: number | null;
+    pulsingBorderThickness?: number | null;
+    pulsingBorderSoftness?: number | null;
+    pulsingBorderMargin?: number | null;
+    pulsingBorderMarginLeft?: number | null;
+    pulsingBorderMarginRight?: number | null;
+    pulsingBorderMarginTop?: number | null;
+    pulsingBorderMarginBottom?: number | null;
+    pulsingBorderAspectRatio?: ('auto' | 'square') | null;
+    pulsingBorderIntensity?: number | null;
+    pulsingBorderBloom?: number | null;
+    pulsingBorderSpots?: number | null;
+    pulsingBorderSpotSize?: number | null;
+    pulsingBorderPulse?: number | null;
+    pulsingBorderSmoke?: number | null;
+    pulsingBorderSmokeSize?: number | null;
+    colorPanelsColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    colorPanelsColorBack?: string | null;
+    colorPanelsAngle1?: number | null;
+    colorPanelsAngle2?: number | null;
+    colorPanelsLength?: number | null;
+    colorPanelsEdges?: boolean | null;
+    colorPanelsBlur?: number | null;
+    colorPanelsFadeIn?: number | null;
+    colorPanelsFadeOut?: number | null;
+    colorPanelsDensity?: number | null;
+    colorPanelsGradient?: number | null;
+    staticMeshGradientColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    staticMeshGradientPositions?: number | null;
+    staticMeshGradientWaveX?: number | null;
+    staticMeshGradientWaveXShift?: number | null;
+    staticMeshGradientWaveY?: number | null;
+    staticMeshGradientWaveYShift?: number | null;
+    staticMeshGradientMixing?: number | null;
+    staticMeshGradientGrainMixer?: number | null;
+    staticMeshGradientGrainOverlay?: number | null;
+    staticRadialGradientColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    staticRadialGradientColorBack?: string | null;
+    staticRadialGradientRadius?: number | null;
+    staticRadialGradientFocalDistance?: number | null;
+    staticRadialGradientFocalAngle?: number | null;
+    staticRadialGradientFalloff?: number | null;
+    staticRadialGradientMixing?: number | null;
+    staticRadialGradientDistortion?: number | null;
+    staticRadialGradientDistortionShift?: number | null;
+    staticRadialGradientDistortionFreq?: number | null;
+    staticRadialGradientGrainMixer?: number | null;
+    staticRadialGradientGrainOverlay?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    paperTextureColorFront?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    paperTextureColorBack?: string | null;
+    paperTextureContrast?: number | null;
+    paperTextureRoughness?: number | null;
+    paperTextureFiber?: number | null;
+    paperTextureFiberSize?: number | null;
+    paperTextureCrumples?: number | null;
+    paperTextureCrumpleSize?: number | null;
+    paperTextureFolds?: number | null;
+    paperTextureFoldCount?: number | null;
+    paperTextureFade?: number | null;
+    paperTextureDrops?: number | null;
+    paperTextureSeed?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    flutedGlassColorBack?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    flutedGlassColorShadow?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    flutedGlassColorHighlight?: string | null;
+    flutedGlassShadows?: number | null;
+    flutedGlassHighlights?: number | null;
+    flutedGlassSize?: number | null;
+    flutedGlassShape?: ('lines' | 'linesIrregular' | 'wave' | 'zigzag' | 'pattern') | null;
+    flutedGlassAngle?: number | null;
+    flutedGlassDistortionShape?: ('prism' | 'lens' | 'contour' | 'cascade' | 'flat') | null;
+    flutedGlassDistortion?: number | null;
+    flutedGlassShift?: number | null;
+    flutedGlassStretch?: number | null;
+    flutedGlassBlur?: number | null;
+    flutedGlassEdges?: number | null;
+    flutedGlassMargin?: number | null;
+    flutedGlassGrainMixer?: number | null;
+    flutedGlassGrainOverlay?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    waterColorBack?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    waterColorHighlight?: string | null;
+    waterHighlights?: number | null;
+    waterLayering?: number | null;
+    waterEdges?: number | null;
+    waterCaustic?: number | null;
+    waterWaves?: number | null;
+    waterSize?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    imageDitheringColorFront?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    imageDitheringColorBack?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    imageDitheringColorHighlight?: string | null;
+    imageDitheringType?: ('random' | '2x2' | '4x4' | '8x8') | null;
+    imageDitheringSize?: number | null;
+    imageDitheringColorSteps?: number | null;
+    imageDitheringOriginalColors?: boolean | null;
+    imageDitheringInverted?: boolean | null;
+    heatmapColors?:
+      | {
+          /**
+           * CSS color value
+           */
+          color: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    heatmapColorBack?: string | null;
+    heatmapContour?: number | null;
+    heatmapAngle?: number | null;
+    heatmapNoise?: number | null;
+    heatmapInnerGlow?: number | null;
+    heatmapOuterGlow?: number | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    liquidMetalColorBack?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    liquidMetalColorTint?: string | null;
+    liquidMetalRepetition?: number | null;
+    liquidMetalSoftness?: number | null;
+    liquidMetalShiftRed?: number | null;
+    liquidMetalShiftBlue?: number | null;
+    liquidMetalDistortion?: number | null;
+    liquidMetalContour?: number | null;
+    liquidMetalAngle?: number | null;
+    liquidMetalShape?: ('none' | 'circle' | 'daisy' | 'diamond' | 'metaballs') | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    halftoneDotsColorFront?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    halftoneDotsColorBack?: string | null;
+    halftoneDotsSize?: number | null;
+    halftoneDotsGrid?: ('square' | 'hex') | null;
+    halftoneDotsRadius?: number | null;
+    halftoneDotsContrast?: number | null;
+    halftoneDotsOriginalColors?: boolean | null;
+    halftoneDotsInverted?: boolean | null;
+    halftoneDotsGrainMixer?: number | null;
+    halftoneDotsGrainOverlay?: number | null;
+    halftoneDotsGrainSize?: number | null;
+    halftoneDotsType?: ('classic' | 'gooey' | 'holes' | 'soft') | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    halftoneCmykColorBack?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    halftoneCmykColorC?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    halftoneCmykColorM?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    halftoneCmykColorY?: string | null;
+    /**
+     * Any CSS color value (e.g. #ff0000, rgba(255,0,0,1))
+     */
+    halftoneCmykColorK?: string | null;
+    halftoneCmykSize?: number | null;
+    halftoneCmykMinDot?: number | null;
+    halftoneCmykContrast?: number | null;
+    halftoneCmykSoftness?: number | null;
+    halftoneCmykGrainSize?: number | null;
+    halftoneCmykGrainMixer?: number | null;
+    halftoneCmykGrainOverlay?: number | null;
+    halftoneCmykGridNoise?: number | null;
+    halftoneCmykFloodC?: number | null;
+    halftoneCmykFloodM?: number | null;
+    halftoneCmykFloodY?: number | null;
+    halftoneCmykFloodK?: number | null;
+    halftoneCmykGainC?: number | null;
+    halftoneCmykGainM?: number | null;
+    halftoneCmykGainY?: number | null;
+    halftoneCmykGainK?: number | null;
+    halftoneCmykType?: ('dots' | 'ink' | 'sharp') | null;
   };
   layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | OurProcessBlock)[];
   meta?: {
@@ -1176,6 +1728,341 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        shaderType?: T;
+        shaderSpeed?: T;
+        shaderScale?: T;
+        shaderRotation?: T;
+        meshGradientColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        meshGradientDistortion?: T;
+        meshGradientSwirl?: T;
+        meshGradientGrainMixer?: T;
+        meshGradientGrainOverlay?: T;
+        smokeRingColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        smokeRingColorBack?: T;
+        smokeRingThickness?: T;
+        smokeRingRadius?: T;
+        smokeRingInnerShape?: T;
+        smokeRingNoiseIterations?: T;
+        smokeRingNoiseScale?: T;
+        neuroNoiseColorFront?: T;
+        neuroNoiseColorMid?: T;
+        neuroNoiseColorBack?: T;
+        neuroNoiseBrightness?: T;
+        neuroNoiseContrast?: T;
+        dotOrbitColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        dotOrbitColorBack?: T;
+        dotOrbitSize?: T;
+        dotOrbitSizeRange?: T;
+        dotOrbitSpreading?: T;
+        dotOrbitStepsPerColor?: T;
+        dotGridColorBack?: T;
+        dotGridColorFill?: T;
+        dotGridColorStroke?: T;
+        dotGridSize?: T;
+        dotGridGapX?: T;
+        dotGridGapY?: T;
+        dotGridStrokeWidth?: T;
+        dotGridSizeRange?: T;
+        dotGridOpacityRange?: T;
+        dotGridShape?: T;
+        simplexNoiseColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        simplexNoiseStepsPerColor?: T;
+        simplexNoiseSoftness?: T;
+        metaballsColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        metaballsColorBack?: T;
+        metaballsCount?: T;
+        metaballsSize?: T;
+        wavesColorFront?: T;
+        wavesColorBack?: T;
+        wavesShape?: T;
+        wavesAmplitude?: T;
+        wavesFrequency?: T;
+        wavesSpacing?: T;
+        wavesProportion?: T;
+        wavesSoftness?: T;
+        perlinNoiseColorFront?: T;
+        perlinNoiseColorBack?: T;
+        perlinNoiseProportion?: T;
+        perlinNoiseSoftness?: T;
+        perlinNoiseOctaveCount?: T;
+        perlinNoisePersistence?: T;
+        perlinNoiseLacunarity?: T;
+        voronoiColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        voronoiStepsPerColor?: T;
+        voronoiColorGap?: T;
+        voronoiColorGlow?: T;
+        voronoiDistortion?: T;
+        voronoiGap?: T;
+        voronoiGlow?: T;
+        warpColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        warpProportion?: T;
+        warpSoftness?: T;
+        warpShape?: T;
+        warpShapeScale?: T;
+        warpDistortion?: T;
+        warpSwirl?: T;
+        warpSwirlIterations?: T;
+        godRaysColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        godRaysColorBack?: T;
+        godRaysColorBloom?: T;
+        godRaysBloom?: T;
+        godRaysIntensity?: T;
+        godRaysDensity?: T;
+        godRaysSpotty?: T;
+        godRaysMidSize?: T;
+        godRaysMidIntensity?: T;
+        spiralColorFront?: T;
+        spiralColorBack?: T;
+        spiralDensity?: T;
+        spiralDistortion?: T;
+        spiralStrokeWidth?: T;
+        spiralStrokeTaper?: T;
+        spiralStrokeCap?: T;
+        spiralNoise?: T;
+        spiralNoiseFrequency?: T;
+        spiralSoftness?: T;
+        swirlColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        swirlColorBack?: T;
+        swirlBandCount?: T;
+        swirlTwist?: T;
+        swirlCenter?: T;
+        swirlProportion?: T;
+        swirlSoftness?: T;
+        swirlNoise?: T;
+        swirlNoiseFrequency?: T;
+        ditheringColorFront?: T;
+        ditheringColorBack?: T;
+        ditheringShape?: T;
+        ditheringType?: T;
+        ditheringSize?: T;
+        grainGradientColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        grainGradientColorBack?: T;
+        grainGradientSoftness?: T;
+        grainGradientIntensity?: T;
+        grainGradientNoise?: T;
+        grainGradientShape?: T;
+        pulsingBorderColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        pulsingBorderColorBack?: T;
+        pulsingBorderRoundness?: T;
+        pulsingBorderThickness?: T;
+        pulsingBorderSoftness?: T;
+        pulsingBorderMargin?: T;
+        pulsingBorderMarginLeft?: T;
+        pulsingBorderMarginRight?: T;
+        pulsingBorderMarginTop?: T;
+        pulsingBorderMarginBottom?: T;
+        pulsingBorderAspectRatio?: T;
+        pulsingBorderIntensity?: T;
+        pulsingBorderBloom?: T;
+        pulsingBorderSpots?: T;
+        pulsingBorderSpotSize?: T;
+        pulsingBorderPulse?: T;
+        pulsingBorderSmoke?: T;
+        pulsingBorderSmokeSize?: T;
+        colorPanelsColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        colorPanelsColorBack?: T;
+        colorPanelsAngle1?: T;
+        colorPanelsAngle2?: T;
+        colorPanelsLength?: T;
+        colorPanelsEdges?: T;
+        colorPanelsBlur?: T;
+        colorPanelsFadeIn?: T;
+        colorPanelsFadeOut?: T;
+        colorPanelsDensity?: T;
+        colorPanelsGradient?: T;
+        staticMeshGradientColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        staticMeshGradientPositions?: T;
+        staticMeshGradientWaveX?: T;
+        staticMeshGradientWaveXShift?: T;
+        staticMeshGradientWaveY?: T;
+        staticMeshGradientWaveYShift?: T;
+        staticMeshGradientMixing?: T;
+        staticMeshGradientGrainMixer?: T;
+        staticMeshGradientGrainOverlay?: T;
+        staticRadialGradientColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        staticRadialGradientColorBack?: T;
+        staticRadialGradientRadius?: T;
+        staticRadialGradientFocalDistance?: T;
+        staticRadialGradientFocalAngle?: T;
+        staticRadialGradientFalloff?: T;
+        staticRadialGradientMixing?: T;
+        staticRadialGradientDistortion?: T;
+        staticRadialGradientDistortionShift?: T;
+        staticRadialGradientDistortionFreq?: T;
+        staticRadialGradientGrainMixer?: T;
+        staticRadialGradientGrainOverlay?: T;
+        paperTextureColorFront?: T;
+        paperTextureColorBack?: T;
+        paperTextureContrast?: T;
+        paperTextureRoughness?: T;
+        paperTextureFiber?: T;
+        paperTextureFiberSize?: T;
+        paperTextureCrumples?: T;
+        paperTextureCrumpleSize?: T;
+        paperTextureFolds?: T;
+        paperTextureFoldCount?: T;
+        paperTextureFade?: T;
+        paperTextureDrops?: T;
+        paperTextureSeed?: T;
+        flutedGlassColorBack?: T;
+        flutedGlassColorShadow?: T;
+        flutedGlassColorHighlight?: T;
+        flutedGlassShadows?: T;
+        flutedGlassHighlights?: T;
+        flutedGlassSize?: T;
+        flutedGlassShape?: T;
+        flutedGlassAngle?: T;
+        flutedGlassDistortionShape?: T;
+        flutedGlassDistortion?: T;
+        flutedGlassShift?: T;
+        flutedGlassStretch?: T;
+        flutedGlassBlur?: T;
+        flutedGlassEdges?: T;
+        flutedGlassMargin?: T;
+        flutedGlassGrainMixer?: T;
+        flutedGlassGrainOverlay?: T;
+        waterColorBack?: T;
+        waterColorHighlight?: T;
+        waterHighlights?: T;
+        waterLayering?: T;
+        waterEdges?: T;
+        waterCaustic?: T;
+        waterWaves?: T;
+        waterSize?: T;
+        imageDitheringColorFront?: T;
+        imageDitheringColorBack?: T;
+        imageDitheringColorHighlight?: T;
+        imageDitheringType?: T;
+        imageDitheringSize?: T;
+        imageDitheringColorSteps?: T;
+        imageDitheringOriginalColors?: T;
+        imageDitheringInverted?: T;
+        heatmapColors?:
+          | T
+          | {
+              color?: T;
+              id?: T;
+            };
+        heatmapColorBack?: T;
+        heatmapContour?: T;
+        heatmapAngle?: T;
+        heatmapNoise?: T;
+        heatmapInnerGlow?: T;
+        heatmapOuterGlow?: T;
+        liquidMetalColorBack?: T;
+        liquidMetalColorTint?: T;
+        liquidMetalRepetition?: T;
+        liquidMetalSoftness?: T;
+        liquidMetalShiftRed?: T;
+        liquidMetalShiftBlue?: T;
+        liquidMetalDistortion?: T;
+        liquidMetalContour?: T;
+        liquidMetalAngle?: T;
+        liquidMetalShape?: T;
+        halftoneDotsColorFront?: T;
+        halftoneDotsColorBack?: T;
+        halftoneDotsSize?: T;
+        halftoneDotsGrid?: T;
+        halftoneDotsRadius?: T;
+        halftoneDotsContrast?: T;
+        halftoneDotsOriginalColors?: T;
+        halftoneDotsInverted?: T;
+        halftoneDotsGrainMixer?: T;
+        halftoneDotsGrainOverlay?: T;
+        halftoneDotsGrainSize?: T;
+        halftoneDotsType?: T;
+        halftoneCmykColorBack?: T;
+        halftoneCmykColorC?: T;
+        halftoneCmykColorM?: T;
+        halftoneCmykColorY?: T;
+        halftoneCmykColorK?: T;
+        halftoneCmykSize?: T;
+        halftoneCmykMinDot?: T;
+        halftoneCmykContrast?: T;
+        halftoneCmykSoftness?: T;
+        halftoneCmykGrainSize?: T;
+        halftoneCmykGrainMixer?: T;
+        halftoneCmykGrainOverlay?: T;
+        halftoneCmykGridNoise?: T;
+        halftoneCmykFloodC?: T;
+        halftoneCmykFloodM?: T;
+        halftoneCmykFloodY?: T;
+        halftoneCmykFloodK?: T;
+        halftoneCmykGainC?: T;
+        halftoneCmykGainM?: T;
+        halftoneCmykGainY?: T;
+        halftoneCmykGainK?: T;
+        halftoneCmykType?: T;
       };
   layout?:
     | T

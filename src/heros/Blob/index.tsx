@@ -5,8 +5,8 @@ import type { Page } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
-import RichText from '@/components/RichText'
 import { GrainGradient } from '@paper-design/shaders-react'
+import { AnimatedText } from '@/components/AnimatedText'
 
 export const BlobHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
   const [isVisible, setIsVisible] = React.useState(true)
@@ -19,7 +19,7 @@ export const BlobHero: React.FC<Page['hero']> = ({ links, media, richText }) => 
 
   return (
     <div
-      className="relative w-screen h-[calc(100svh-var(--admin-bar-height,0px))] flex items-center justify-center overflow-hidden text-white"
+      className="relative w-screen h-[calc(100svh-var(--admin-bar-height,0px))] flex items-center justify-center overflow-hidden text-white border-b"
       data-theme="dark"
     >
       {/* Background media */}
@@ -43,19 +43,21 @@ export const BlobHero: React.FC<Page['hero']> = ({ links, media, richText }) => 
         width={'100%'}
         height={'100%'}
         colors={['#7300ff', '#eba8ff', '#00bfff', '#2b00ff']}
-        colorBack="#000000"
+        colorBack="#ffffff"
         softness={0.6}
         intensity={0.8}
         noise={0}
         shape="blob"
         speed={isVisible ? 0.3 : 0}
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-10 animate-in fade-in duration-1000 fill-mode-backwards"
       />
 
       {/* Content */}
       <div className="absolute inset-0 h-full w-full flex flex-col justify-end">
-        <div className="p-10 max-w-[60ch] mix-blend-exclusion">
-          {richText && <RichText className="mb-4" data={richText} enableGutter={false} />}
+        <div className="p-10 max-w-[60ch]">
+          {richText && (
+            <AnimatedText data={richText} delay={1.3} className="text-balance mb-4 text-black" />
+          )}
         </div>
       </div>
     </div>

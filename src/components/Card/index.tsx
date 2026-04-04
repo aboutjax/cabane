@@ -10,7 +10,7 @@ import { Media } from '@/components/Media'
 
 export type CardPostData =
   | Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'heroImage'>
-  | Pick<Project, 'slug' | 'categories' | 'meta' | 'title' | 'featuredImage'>
+  | Pick<Project, 'slug' | 'categories' | 'meta' | 'title' | 'featuredImage' | 'description'>
 
 export const Card: React.FC<{
   alignItems?: 'center'
@@ -23,8 +23,8 @@ export const Card: React.FC<{
   const { card, link } = useClickableCard({})
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props
 
-  const { slug, categories, meta, title } = doc || {}
-  const { description } = meta || {}
+  const { slug, categories, title } = doc || {}
+  const description = doc && 'description' in doc ? doc.description : null
   const featuredImage =
     doc && 'heroImage' in doc
       ? doc.heroImage
