@@ -24,6 +24,7 @@ export const HeaderNav: React.FC = () => {
     <header
       ref={headerRef}
       className="fixed top-(--admin-bar-height,0px) z-50 w-full mix-blend-difference text-white animate-in fade-in duration-700 delay-[0.8s] fill-mode-backwards"
+      style={{ viewTransitionName: 'site-header' }}
     >
       <div className="flex justify-between items-center px-6 md:px-10 py-5">
         <Link href="/" className="h-5">

@@ -58,6 +58,7 @@ export const AdminBar: React.FC<{
   return (
     <div
       ref={barRef}
+      style={{ viewTransitionName: 'site-admin-bar' }}
       className={cn(
         baseClass,
         'sticky flex items-center justify-center top-0 z-99 px-6 py-2 bg-black text-white h-8',

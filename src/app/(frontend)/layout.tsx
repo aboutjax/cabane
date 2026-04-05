@@ -8,7 +8,7 @@ const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
   variable: '--font-hanken-grotesk',
 })
-import React from 'react'
+import React, { ViewTransition } from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
@@ -40,7 +40,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
 
           <Header />
-          {children}
+          <ViewTransition>{children}</ViewTransition>
           <Footer />
         </Providers>
       </body>
