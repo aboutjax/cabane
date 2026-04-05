@@ -25,7 +25,7 @@ export const HeaderNav: React.FC = () => {
       ref={headerRef}
       className="fixed top-(--admin-bar-height,0px) z-50 w-full mix-blend-difference text-white animate-in fade-in duration-700 delay-[0.8s] fill-mode-backwards"
     >
-      <div className="flex justify-between items-center px-6 md:px-10 py-5">
+      <div className="flex justify-between items-center px-6 sm:px-8 py-5">
         <Link href="/" className="shrink-0 block">
           <Logo height={12} />
         </Link>

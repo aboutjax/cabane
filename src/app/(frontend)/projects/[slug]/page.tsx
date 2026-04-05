@@ -62,19 +62,19 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
       {draft && <LivePreviewListener />}
 
       {/* Project Header */}
-      <div className="pt-40 px-8 pb-8">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-10">
+      <div className="pt-40 px-6 sm:px-8 pb-8 text-balance">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-10">
           {project.title}
         </h1>
 
         {project.description && (
-          <p className="text-lg md:text-xl leading-relaxed text-muted-foreground max-w-2xl mb-12">
+          <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground max-w-2xl mb-12">
             {project.description}
           </p>
         )}
 
         {/* Metadata Table */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-x-8 gap-y-6 border-t border-border pt-8">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-x-8 gap-y-6 border-t border-border pt-8">
           {project.date && (
             <div>
               <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Year</p>
@@ -138,28 +138,23 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
             className="absolute inset-0 blur-3xl brightness-40 h-full w-full scale-160"
           />
           <div className="relative h-full">
-            <Image
-              {...featuredImageProps}
-              className="h-full w-auto object-contain"
-            />
+            <Image {...featuredImageProps} className="h-full w-auto object-contain" />
           </div>
         </div>
       )}
 
       {/* Content */}
       {project.content && (
-        <div className="px-6 md:px-10">
+        <div className="px-6 sm:px-8 text-balance">
           <div className="max-w-3xl mx-auto py-16">
-            {project.content && (
-              <RichText className="mb-16" data={project.content} enableGutter={false} />
-            )}
+            <RichText className="mb-16" data={project.content} enableGutter={false} />
           </div>
         </div>
       )}
 
       {/* Gallery - Full Bleed */}
       {project.gallery && project.gallery.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px">
           {project.gallery.map((item, index) => {
             const image = item.image as MediaType | undefined
             if (!image || typeof image === 'string' || !image.url) return null

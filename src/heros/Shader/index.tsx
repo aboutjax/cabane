@@ -55,12 +55,12 @@ export const ShaderHero: React.FC<Page['hero']> = (props) => {
 
       {/* Content */}
       <div className="absolute inset-0 h-full w-full flex flex-col justify-end">
-        <div className="sm:p-10 p-6 max-w-[80ch]">
+        <div className="sm:p-10 p-6 xl:max-w-[75%]">
           {richText && (
             <AnimatedText
               data={richText}
               delay={1.3}
-              className="text-balance mb-4 text-white mix-blend-exclusion text-lg lg:text-3xl"
+              className="text-balance mb-4 text-white mix-blend-exclusion text-lg lg:text-5xl leading-tight"
             />
           )}
           {Array.isArray(links) && links.length > 0 && (

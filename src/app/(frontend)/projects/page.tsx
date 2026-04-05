@@ -33,11 +33,11 @@ export default async function Page() {
 
   return (
     <div className="pt-40 pb-8">
-      <div className="px-6 md:px-10 mb-16 lg:mb-24">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">Projects</h1>
+      <div className="px-6 sm:px-8 mb-16 lg:mb-24">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">Projects</h1>
       </div>
 
-      <div className="px-6 md:px-10">
+      <div className="px-6 sm:px-8">
         <div className={cardGridClassName}>
           {projects.docs.map((project) => (
             <Card key={project.slug} doc={project} relationTo="projects" />
