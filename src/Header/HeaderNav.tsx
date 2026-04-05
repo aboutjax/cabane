@@ -27,7 +27,7 @@ export const HeaderNav: React.FC = () => {
     >
       <div className="flex justify-between items-center px-6 md:px-10 py-5">
         <Link href="/" className="shrink-0 block">
-          <Logo />
+          <Logo height={12} />
         </Link>
         <nav className="w-full gap-[10%] flex-1 flex justify-end items-center text-sm">
           {navLinks.map(({ label, href }) => (
