@@ -45,6 +45,15 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
   if (!project) return <PayloadRedirects url={url} />
 
   const featuredImage = project.featuredImage as MediaType | undefined
+  const featuredImageProps =
+    featuredImage && typeof featuredImage !== 'string' && featuredImage.url
+      ? {
+          src: featuredImage.sizes?.xlarge?.url || featuredImage.url,
+          alt: featuredImage.alt || '',
+          width: featuredImage.sizes?.xlarge?.width || featuredImage.width || 1920,
+          height: featuredImage.sizes?.xlarge?.height || featuredImage.height || 1080,
+        }
+      : null
 
   return (
     <article>
@@ -122,16 +131,18 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
       </div>
 
       {/* Featured Image - Full Bleed */}
-      {featuredImage && typeof featuredImage !== 'string' && featuredImage.url && (
-        <div className="relative w-full aspect-video overflow-hidden">
+      {featuredImageProps && (
+        <div className="aspect-video w-full bg-black flex items-center justify-center overflow-hidden relative">
           <Image
-            src={featuredImage.url}
-            alt={featuredImage.alt || project.title}
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
+            {...featuredImageProps}
+            className="absolute inset-0 blur-3xl brightness-40 h-full w-full scale-160"
           />
+          <div className="relative h-full">
+            <Image
+              {...featuredImageProps}
+              className="h-full w-auto object-contain"
+            />
+          </div>
         </div>
       )}
 

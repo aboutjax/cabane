@@ -60,7 +60,7 @@ export const ShaderHero: React.FC<Page['hero']> = (props) => {
             <AnimatedText
               data={richText}
               delay={1.3}
-              className="text-balance mb-4 text-white mix-blend-exclusion text-xl sm:text-3xl"
+              className="text-balance mb-4 text-white mix-blend-exclusion text-lg lg:text-3xl"
             />
           )}
           {Array.isArray(links) && links.length > 0 && (

@@ -85,7 +85,13 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         .join(', ')
 
   return (
-    <picture className={cn(pictureClassName, { 'relative w-full aspect-video': !fill && (!width || !height) })}>
+    <picture
+      className={cn(
+        pictureClassName,
+        !fill && (!width || !height) && 'relative w-full aspect-video',
+        fill && 'absolute inset-0',
+      )}
+    >
       <NextImage
         alt={alt || ''}
         className={cn(imgClassName)}
