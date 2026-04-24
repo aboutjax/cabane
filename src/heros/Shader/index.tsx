@@ -37,7 +37,7 @@ export const ShaderHero: React.FC<Page['hero']> = (props) => {
 
   return (
     <div
-      className="relative w-screen h-[calc(100svh-var(--admin-bar-height,0px))] flex items-center justify-center overflow-hidden text-white"
+      className="relative w-screen min-h-[calc(100svh-var(--admin-bar-height,0px))] flex items-center justify-center overflow-hidden text-white"
       data-theme="dark"
     >
       <Suspense fallback={<div className="absolute inset-0 bg-black" />}>
@@ -54,13 +54,13 @@ export const ShaderHero: React.FC<Page['hero']> = (props) => {
       </Suspense>
 
       {/* Content */}
-      <div className="absolute inset-0 h-full w-full flex flex-col justify-end">
+      <div className="absolute inset-0 min-h-full w-full flex flex-col justify-end">
         <div className="sm:p-10 p-6 xl:max-w-[75%]">
           {richText && (
             <AnimatedText
               data={richText}
               delay={1.3}
-              className="text-balance mb-4 text-white mix-blend-exclusion text-lg lg:text-5xl leading-tight"
+              className="text-balance mb-4 text-white mix-blend-exclusion text-3xl lg:text-5xl leading-tight"
             />
           )}
           {Array.isArray(links) && links.length > 0 && (

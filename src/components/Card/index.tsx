@@ -19,12 +19,13 @@ export const Card: React.FC<{
   alignItems?: 'center'
   className?: string
   doc?: CardPostData
+  priority?: boolean
   relationTo?: 'posts' | 'projects'
   showCategories?: boolean
   title?: string
 }> = (props) => {
   const { card, link } = useClickableCard({})
-  const { className, doc, relationTo, title: titleFromProps } = props
+  const { className, doc, priority, relationTo, title: titleFromProps } = props
 
   const { slug, categories, title } = doc || {}
   const description = doc && 'description' in doc ? doc.description : null
@@ -48,8 +49,9 @@ export const Card: React.FC<{
           <Media
             resource={featuredImage}
             fill
+            priority={priority}
             imgClassName="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
-            size="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            size="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 16vw"
           />
         )}
       </div>

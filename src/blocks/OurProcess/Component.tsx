@@ -32,8 +32,8 @@ export const OurProcessBlock: React.FC<OurProcessBlockProps> = ({ heading, subHe
   if (!steps || steps.length === 0) return null
 
   return (
-    <div className="w-full py-12 bg-foreground/10">
-      <div className="container">
+    <div className="w-full">
+      <div className="container py-12">
         {heading && <h2 className="text-3xl md:text-4xl font-bold mb-16">{heading}</h2>}
         {subHeading && (
           <p className="text-lg md:text-xl text-muted-foreground mb-16">{subHeading}</p>
@@ -58,7 +58,7 @@ export const OurProcessBlock: React.FC<OurProcessBlockProps> = ({ heading, subHe
                   {step.description && <RichText data={step.description} enableGutter={false} />}
                 </div>
                 <div
-                  className={`relative aspect-square overflow-hidden rounded-lg ${isEven ? 'md:order-2' : 'md:order-1'}`}
+                  className={`relative aspect-square overflow-hidden ${isEven ? 'md:order-2' : 'md:order-1'}`}
                 >
                   {step.image && typeof step.image !== 'number' && (
                     <Media resource={step.image} fill imgClassName="object-cover" />

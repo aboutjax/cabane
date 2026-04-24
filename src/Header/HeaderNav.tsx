@@ -1,16 +1,12 @@
 'use client'
 import { Logo } from '@/components/Logo/Logo'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { CMSLink } from '@/components/Link'
+import type { Header as HeaderType } from '@/payload-types'
 import React from 'react'
+import Link from 'next/link'
 
-const navLinks = [
-  { label: 'Projects', href: '/projects' },
-  { label: 'About', href: '/about' },
-]
-
-export const HeaderNav: React.FC = () => {
-  const pathname = usePathname()
+export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
+  const navItems = data?.navItems || []
   const headerRef = React.useRef<HTMLElement>(null)
 
   React.useEffect(() => {
@@ -29,15 +25,9 @@ export const HeaderNav: React.FC = () => {
         <Link href="/" className="shrink-0 block">
           <Logo height={12} />
         </Link>
-        <nav className="w-full gap-[10%] flex-1 flex justify-end items-center text-sm">
-          {navLinks.map(({ label, href }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`hover:opacity-60 transition-opacity ${pathname === href ? 'opacity-100' : 'opacity-80'}`}
-            >
-              {label}
-            </Link>
+        <nav className="w-full gap-4 flex-1 flex justify-end items-center text-sm">
+          {navItems.map(({ link }, i) => (
+            <CMSLink key={i} {...link} className="hover:opacity-60 transition-opacity opacity-80" />
           ))}
         </nav>
       </div>

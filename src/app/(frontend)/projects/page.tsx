@@ -39,8 +39,14 @@ export default async function Page() {
 
       <div className="px-6 sm:px-8">
         <div className={cardGridClassName}>
-          {projects.docs.map((project) => (
-            <Card key={project.slug} doc={project} relationTo="projects" />
+          {projects.docs.map((project, index) => (
+            <div
+              key={project.slug}
+              className="card-enter"
+              style={{ animationDelay: `${Math.min(index, 10) * 50}ms` }}
+            >
+              <Card doc={project} relationTo="projects" priority={index < 12} />
+            </div>
           ))}
         </div>
       </div>
