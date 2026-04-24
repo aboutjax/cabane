@@ -67,16 +67,18 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page
 
   return (
-    <article className="min-h-dvh divide-y divide-border">
-      {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound url={url} />
+    <Reveal>
+      <article className="min-h-dvh divide-y divide-border">
+        {/* Allows redirects for valid pages too */}
+        <PayloadRedirects disableNotFound url={url} />
 
-      {draft && <LivePreviewListener />}
+        {draft && <LivePreviewListener />}
 
-      <RenderHero {...hero} />
+        <RenderHero {...hero} />
 
-      <RenderBlocks blocks={layout} />
-    </article>
+        <RenderBlocks blocks={layout} />
+      </article>
+    </Reveal>
   )
 }
 
