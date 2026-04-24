@@ -21,3 +21,8 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Claude Code
+.claude/skills/
+.claude/settings.local.json
+.agents/skills/
