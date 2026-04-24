@@ -19,7 +19,7 @@ export const BlobHero: React.FC<Page['hero']> = ({ links, media, richText }) => 
 
   return (
     <div
-      className="relative w-screen h-[calc(100svh-var(--admin-bar-height,0px))] flex items-center justify-center overflow-hidden text-white border-b"
+      className="relative w-full h-[calc(100svh-var(--admin-bar-height,0px))] flex items-center justify-center overflow-hidden text-white border-b"
       data-theme="dark"
     >
       {/* Background media */}

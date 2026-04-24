@@ -7,6 +7,7 @@ import { LowImpactHero } from '@/heros/LowImpact'
 import { MediumImpactHero } from '@/heros/MediumImpact'
 import { BlobHero } from '@/heros/Blob'
 import { ShaderHero } from '@/heros/Shader'
+import { GridFrame } from '@/components/GridFrame'
 
 const heroes = {
   highImpact: HighImpactHero,
@@ -25,5 +26,11 @@ export const RenderHero: React.FC<Page['hero']> = (props) => {
 
   if (!HeroToRender) return null
 
-  return <HeroToRender {...props} />
+  return (
+    <GridFrame className="border-t-0">
+      <div className="container py-4 sm:py-8">
+        <HeroToRender {...props} />
+      </div>
+    </GridFrame>
+  )
 }

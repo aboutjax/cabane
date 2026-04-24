@@ -9,7 +9,7 @@ import type { Post, Project } from '@/payload-types'
 import { Media } from '@/components/Media'
 
 export const cardGridClassName =
-  'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-x-4 gap-y-4 lg:gap-x-8 lg:gap-y-8 xl:gap-x-8'
+  'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-4 lg:gap-x-8 lg:gap-y-8 xl:gap-x-8'
 
 export type CardPostData =
   | Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'heroImage'>
@@ -43,7 +43,7 @@ export const Card: React.FC<{
 
   return (
     <article className={cn('group overflow-hidden hover:cursor-pointer', className)} ref={card.ref}>
-      <div className="relative w-full aspect-square overflow-clip">
+      <div className="relative w-full aspect-square overflow-clip rounded-lg">
         {!featuredImage && <div className="">No image</div>}
         {featuredImage && typeof featuredImage !== 'number' && (
           <Media

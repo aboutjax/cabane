@@ -37,9 +37,16 @@ export const ShaderHero: React.FC<Page['hero']> = (props) => {
 
   return (
     <div
-      className="relative w-screen min-h-[calc(100svh-var(--admin-bar-height,0px))] flex items-center justify-center overflow-hidden text-white"
+      className="relative rounded-lg w-full max-h-300 h-svh flex items-center justify-center overflow-hidden text-white"
       data-theme="dark"
     >
+      <div className="absolute inset-10 [writing-mode:vertical-rl] hidden sm:block">
+        <div className="absolute bottom-0 right-0 flex gap-2 font-mono">
+          <span>EST. 2024</span>
+          <span className="opacity-40">•</span>
+          <span>NYC</span>
+        </div>
+      </div>
       <Suspense fallback={<div className="absolute inset-0 bg-black" />}>
         <ShaderComponent
           width="100%"

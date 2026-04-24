@@ -8,6 +8,8 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { OurProcessBlock } from '@/blocks/OurProcess/Component'
+import { Reveal } from '@/components/Reveal'
+import { GridFrame } from '@/components/GridFrame'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -35,11 +37,16 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
+              const isLast = index === blocks.length - 1
               return (
-                <div className="" key={index}>
+                <GridFrame
+                  key={index}
+                  bottomCap={isLast}
+                  className={isLast ? 'border-b border-border' : ''}
+                >
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
-                  <Block {...block} disableInnerContainer />
-                </div>
+                  <Block {...block} />
+                </GridFrame>
               )
             }
           }

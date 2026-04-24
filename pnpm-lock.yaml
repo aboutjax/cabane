@@ -110,6 +110,9 @@ importers:
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.5.0
+      tegaki:
+        specifier: ^0.15.0
+        version: 0.15.0(react@19.2.4)
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3.2.0
@@ -4689,6 +4692,26 @@ packages:
   tapable@2.3.2:
     resolution: {integrity: sha512-1MOpMXuhGzGL5TTCZFItxCc0AARf1EZFQkGqMm7ERKj8+Hgr5oLvJOVFcC+lRmR8hCe2S3jC4T5D7Vg/d7/fhA==}
     engines: {node: '>=6'}
+
+  tegaki@0.15.0:
+    resolution: {integrity: sha512-49iGyhUTM8Zh49GR+UD6tyV3yUHKU8hyOWaR55s7mJl6OrTKU4xI0Zk0bIjR55aJXDEDWDKLYncmtE70NX4YKQ==}
+    peerDependencies:
+      '@nuxt/kit': ^3.0.0 || ^4.0.0
+      react: '>=18'
+      solid-js: '>=1'
+      svelte: '>=5'
+      vue: '>=3'
+    peerDependenciesMeta:
+      '@nuxt/kit':
+        optional: true
+      react:
+        optional: true
+      solid-js:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
 
   thread-stream@3.1.0:
     resolution: {integrity: sha512-OqyPZ9u96VohAyMfJykzmivOrY2wfMSf3C5TtFJVgN+Hm6aj+voFhlK+kZEIv2FBh1X6Xp3DlnCOfEQ3B2J86A==}
@@ -9933,6 +9956,10 @@ snapshots:
   tailwindcss@4.2.2: {}
 
   tapable@2.3.2: {}
+
+  tegaki@0.15.0(react@19.2.4):
+    optionalDependencies:
+      react: 19.2.4
 
   thread-stream@3.1.0:
     dependencies:

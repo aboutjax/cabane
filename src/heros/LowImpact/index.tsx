@@ -20,7 +20,7 @@ type LowImpactHeroType =
 
 export const LowImpactHero: React.FC<LowImpactHeroType> = ({ children, richText, media }) => {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full rounded-lg overflow-clip">
       <div className="min-h-[30vh] select-none flex items-center justify-center text-center">
         {media && typeof media === 'object' && (
           <Media fill imgClassName="-z-10 object-cover" priority resource={media} size="100vw" />
