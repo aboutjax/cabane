@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { resendAdapter } from '@payloadcms/email-resend'
 import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
@@ -62,6 +63,11 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL,
     },
+  }),
+  email: resendAdapter({
+    defaultFromAddress: 'website@cabane.nyc',
+    defaultFromName: 'Cabane Contact Form',
+    apiKey: process.env.RESEND_API_KEY || '',
   }),
   collections: [Pages, Posts, Projects, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),

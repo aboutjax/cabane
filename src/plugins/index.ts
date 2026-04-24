@@ -25,6 +25,60 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
   return doc?.slug ? `${url}/${doc.slug}` : url
 }
 
+const muteFieldLabels = (html: string): string =>
+  html.replace(
+    /<p([^>]*)>([^<>]{1,60}):<\/p>/g,
+    (_m, attrs, label) =>
+      `<p${attrs} style="margin:18px 0 2px 0;font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#a1a1aa;opacity:0.6;">${label}</p>`,
+  )
+
+const wrapInEmailTemplate = (innerHtml: string, subject: string) => `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>${subject}</title>
+  </head>
+  <body style="margin:0;padding:0;background:#f5f4f0;font-family:Georgia,'Times New Roman',serif;color:#18181b;-webkit-font-smoothing:antialiased;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f5f4f0;">
+      <tr>
+        <td align="center" style="padding:48px 16px;">
+          <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%;background:#ffffff;border:1px solid #e7e5e0;">
+            <tr>
+              <td style="padding:28px 40px;border-bottom:1px solid #e7e5e0;">
+                <div style="font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#71717a;">
+                  Cabane &nbsp;&middot;&nbsp; New message
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:40px;">
+                <h1 style="margin:0 0 24px 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;line-height:1.25;font-weight:400;color:#18181b;letter-spacing:-0.01em;">
+                  ${subject}
+                </h1>
+                <div style="font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.7;color:#27272a;">
+                  ${innerHtml}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:24px 40px;border-top:1px solid #e7e5e0;background:#fafaf7;">
+                <div style="font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:12px;line-height:1.5;color:#a1a1aa;">
+                  Sent from the contact form at
+                  <a href="https://cabane.nyc" style="color:#52525b;text-decoration:underline;">cabane.nyc</a>.
+                </div>
+              </td>
+            </tr>
+          </table>
+          <div style="font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#a1a1aa;padding-top:20px;">
+            Cabane
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`
+
 export const plugins: Plugin[] = [
   vercelBlobStorage({
     collections: {
@@ -67,6 +121,14 @@ export const plugins: Plugin[] = [
     fields: {
       payment: false,
     },
+    beforeEmail: (emails) =>
+      emails.map((email) => ({
+        ...email,
+        html: wrapInEmailTemplate(
+          muteFieldLabels(typeof email.html === 'string' ? email.html : ''),
+          typeof email.subject === 'string' ? email.subject : '',
+        ),
+      })),
     formOverrides: {
       fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
