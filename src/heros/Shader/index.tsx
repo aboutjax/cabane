@@ -37,16 +37,10 @@ export const ShaderHero: React.FC<Page['hero']> = (props) => {
 
   return (
     <div
-      className="relative rounded-lg w-full max-h-300 h-svh flex items-center justify-center overflow-hidden text-white"
+      className="relative rounded-lg w-full h-auto flex items-center justify-center overflow-hidden text-white"
       data-theme="dark"
     >
-      <div className="absolute inset-10 [writing-mode:vertical-rl] hidden sm:block">
-        <div className="absolute bottom-0 right-0 flex gap-2 font-mono">
-          <span>EST. 2024</span>
-          <span className="opacity-40">•</span>
-          <span>NYC</span>
-        </div>
-      </div>
+      <div className="relative inset-10 [writing-mode:vertical-rl] hidden sm:block"></div>
       <Suspense fallback={<div className="absolute inset-0 bg-black" />}>
         <ShaderComponent
           width="100%"
@@ -61,7 +55,7 @@ export const ShaderHero: React.FC<Page['hero']> = (props) => {
       </Suspense>
 
       {/* Content */}
-      <div className="absolute inset-0 min-h-full w-full flex flex-col justify-end">
+      <div className="py-[10svh] relative inset-0 min-h-full w-full flex flex-col justify-end">
         <div className="sm:p-10 p-6 xl:max-w-[75%]">
           {richText && (
             <AnimatedText
