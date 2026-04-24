@@ -13,8 +13,9 @@ export const Reveal: React.FC<RevealProps> = ({
   children,
   className = '',
   delay = 0,
-  as: Tag = 'div',
+  as = 'div',
 }) => {
+  const Tag = as as React.ElementType
   const ref = useRef<HTMLElement | null>(null)
   const [visible, setVisible] = useState(false)
 
@@ -40,7 +41,7 @@ export const Reveal: React.FC<RevealProps> = ({
 
   return (
     <Tag
-      ref={ref as React.Ref<never>}
+      ref={ref}
       className={`reveal ${visible ? 'is-visible' : ''} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
