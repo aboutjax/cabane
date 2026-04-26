@@ -244,6 +244,10 @@ export interface Page {
     shaderSpeed?: number | null;
     shaderScale?: number | null;
     shaderRotation?: number | null;
+    /**
+     * Any CSS color value (e.g. #ffffff, rgba(0,0,0,0.8)). Applied to the hero text.
+     */
+    shaderTextColor?: string | null;
     meshGradientColors?:
       | {
           /**
@@ -1744,6 +1748,7 @@ export interface PagesSelect<T extends boolean = true> {
         shaderSpeed?: T;
         shaderScale?: T;
         shaderRotation?: T;
+        shaderTextColor?: T;
         meshGradientColors?:
           | T
           | {

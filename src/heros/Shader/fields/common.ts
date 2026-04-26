@@ -40,4 +40,14 @@ export const commonShaderFields: Field[] = [
       condition: shaderActive,
     },
   },
+  {
+    name: 'shaderTextColor',
+    type: 'text',
+    label: 'Text Color',
+    defaultValue: '#000000',
+    admin: {
+      condition: shaderActive,
+      description: 'Any CSS color value (e.g. #ffffff, rgba(0,0,0,0.8)). Applied to the hero text.',
+    },
+  },
 ]

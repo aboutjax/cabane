@@ -7,6 +7,7 @@ type Props = {
   data: DefaultTypedEditorState
   delay?: number
   className?: string
+  style?: React.CSSProperties
 }
 
 type LexicalNode = {
@@ -34,26 +35,42 @@ function buildDelays(count: number, baseDelay: number): number[] {
   for (let i = 0; i < count; i++) {
     delays.push(t)
     // Random stagger between 20ms and 80ms, with occasional longer pauses
-    const jitter = 0.02 + Math.random() * 0.06
+    const jitter = 0.001 + Math.random() * 0.01
     const pause = Math.random() < 0.15 ? 0.12 : 0 // ~15% chance of a brief pause
     t += jitter + pause
   }
   return delays
 }
 
-export const AnimatedText: React.FC<Props> = ({ data, delay = 0, className }) => {
+export const AnimatedText: React.FC<Props> = ({ data, delay = 0, className, style }) => {
   const words = extractWords((data?.root?.children as LexicalNode[]) ?? [])
   const delays = React.useMemo(() => buildDelays(words.length, delay), [words.length, delay])
+  const [done, setDone] = React.useState(false)
+
+  if (done) {
+    return (
+      <div className={className} style={style}>
+        {words.map((word, i) => (
+          <span key={i} className="inline-block mr-[0.25em]">
+            {word}
+          </span>
+        ))}
+      </div>
+    )
+  }
+
+  const lastIndex = words.length - 1
 
   return (
-    <div className={className}>
+    <div className={className} style={style}>
       {words.map((word, i) => (
         <motion.span
           key={i}
           className="inline-block mr-[0.25em]"
-          initial={{ opacity: 0, filter: 'blur(8px)' }}
-          animate={{ opacity: 1, filter: 'blur(0px)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.3, ease: 'easeOut', delay: delays[i] }}
+          onAnimationComplete={i === lastIndex ? () => setDone(true) : undefined}
         >
           {word}
         </motion.span>
