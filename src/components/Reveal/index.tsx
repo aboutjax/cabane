@@ -32,7 +32,7 @@ export const Reveal: React.FC<RevealProps> = ({
           }
         })
       },
-      { threshold: 0.15, rootMargin: '0px 0px -80px 0px' },
+      { threshold: 0, rootMargin: '0px 0px -10% 0px' },
     )
 
     observer.observe(el)
