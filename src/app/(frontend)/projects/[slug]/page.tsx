@@ -50,10 +50,11 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
   const featuredImageProps =
     featuredImage && typeof featuredImage !== 'string' && featuredImage.url
       ? {
-          src: featuredImage.sizes?.xlarge?.url || featuredImage.url,
+          src: featuredImage.url,
           alt: featuredImage.alt || '',
-          width: featuredImage.sizes?.xlarge?.width || featuredImage.width || 1920,
-          height: featuredImage.sizes?.xlarge?.height || featuredImage.height || 1080,
+          width: featuredImage.width || 1920,
+          height: featuredImage.height || 1080,
+          blurDataURL: featuredImage.blurDataURL || undefined,
         }
       : null
 
@@ -137,10 +138,27 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
         <div className="aspect-video w-full bg-black flex items-center justify-center overflow-hidden relative">
           <Image
             {...featuredImageProps}
+            {...(featuredImageProps.blurDataURL && {
+              placeholder: 'blur' as const,
+              blurDataURL: featuredImageProps.blurDataURL,
+            })}
+            quality={50}
+            sizes="100vw"
+            aria-hidden
             className="absolute inset-0 blur-3xl brightness-40 h-full w-full scale-160"
           />
           <div className="relative h-full">
-            <Image {...featuredImageProps} className="h-full w-auto object-contain" />
+            <Image
+              {...featuredImageProps}
+              {...(featuredImageProps.blurDataURL && {
+                placeholder: 'blur' as const,
+                blurDataURL: featuredImageProps.blurDataURL,
+              })}
+              quality={100}
+              sizes="100vw"
+              priority
+              className="h-full w-auto object-contain"
+            />
           </div>
         </div>
       )}
@@ -173,6 +191,10 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
+                  {...(image.blurDataURL && {
+                    placeholder: 'blur' as const,
+                    blurDataURL: image.blurDataURL,
+                  })}
                 />
               </div>
             )

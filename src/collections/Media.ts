@@ -6,6 +6,7 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import path from 'path'
+import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 import { anyone } from '../access/anyone'
@@ -23,6 +24,24 @@ export const Media: CollectionConfig = {
     read: anyone,
     update: authenticated,
   },
+  hooks: {
+    beforeChange: [
+      async ({ data, req }) => {
+        const file = req.file
+        if (!file?.data || !file.mimetype?.startsWith('image/')) return data
+        try {
+          const buf = await sharp(file.data)
+            .resize(16, 16, { fit: 'inside' })
+            .webp({ quality: 20 })
+            .toBuffer()
+          data.blurDataURL = `data:image/webp;base64,${buf.toString('base64')}`
+        } catch {
+          // leave blurDataURL untouched on failure
+        }
+        return data
+      },
+    ],
+  },
   fields: [
     {
       name: 'alt',
@@ -37,6 +56,11 @@ export const Media: CollectionConfig = {
           return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
         },
       }),
+    },
+    {
+      name: 'blurDataURL',
+      type: 'text',
+      admin: { hidden: true },
     },
   ],
   upload: {
