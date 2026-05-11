@@ -47,7 +47,11 @@ export const Card: React.FC<{
         {!featuredImage && <div className="">No image</div>}
         {featuredImage && typeof featuredImage !== 'number' && (
           <Media
-            resource={featuredImage}
+            resource={
+              featuredImage.sizes?.square?.url
+                ? { ...featuredImage, ...featuredImage.sizes.square }
+                : featuredImage
+            }
             fill
             priority={priority}
             imgClassName="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
