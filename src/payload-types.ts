@@ -763,7 +763,7 @@ export interface Page {
     halftoneCmykGainK?: number | null;
     halftoneCmykType?: ('dots' | 'ink' | 'sharp') | null;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | OurProcessBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | OurProcessBlock | GalleryBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -1024,6 +1024,9 @@ export interface Project {
     };
     [k: string]: unknown;
   } | null;
+  layout?:
+    | (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | OurProcessBlock | GalleryBlock)[]
+    | null;
   gallery?:
     | {
         image: number | Media;
@@ -1440,6 +1443,22 @@ export interface OurProcessBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'ourProcess';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  layout: 'grid' | 'carousel' | 'masonry';
+  items: {
+    media: number | Media;
+    caption?: string | null;
+    altOverride?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2090,6 +2109,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         ourProcess?: T | OurProcessBlockSelect<T>;
+        gallery?: T | GalleryBlockSelect<T>;
       };
   meta?:
     | T
@@ -2209,6 +2229,23 @@ export interface OurProcessBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  layout?: T;
+  items?:
+    | T
+    | {
+        media?: T;
+        caption?: T;
+        altOverride?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -2246,6 +2283,17 @@ export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
   featuredImage?: T;
   content?: T;
+  layout?:
+    | T
+    | {
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+        ourProcess?: T | OurProcessBlockSelect<T>;
+        gallery?: T | GalleryBlockSelect<T>;
+      };
   gallery?:
     | T
     | {

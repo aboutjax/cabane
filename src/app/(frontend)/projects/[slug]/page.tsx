@@ -7,10 +7,12 @@ import { draftMode } from 'next/headers'
 import { cache } from 'react'
 import RichText from '@/components/RichText'
 import Image from 'next/image'
+import { RenderBlocks } from '@/blocks/RenderBlocks'
 
 import type { Media as MediaType } from '@/payload-types'
 
 import { generateMeta } from '@/utilities/generateMeta'
+import { isEmptyArray, isLexicalEmpty } from '@/utilities/isLexicalEmpty'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
 export async function generateStaticParams() {
@@ -144,7 +146,7 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
       )}
 
       {/* Content */}
-      {project.content && (
+      {project.content && !isLexicalEmpty(project.content) && (
         <div className="px-6 sm:px-8 text-balance">
           <div className="max-w-3xl mx-auto py-16">
             <RichText className="mb-16" data={project.content} enableGutter={false} />
@@ -152,7 +154,11 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
         </div>
       )}
 
+      {/* Layout Blocks */}
+      {!isEmptyArray(project.layout) && <RenderBlocks blocks={project.layout!} />}
+
       {/* Gallery - Full Bleed */}
+      {/* Delete this after migration */}
       {project.gallery && project.gallery.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-px">
           {project.gallery.map((item, index) => {
