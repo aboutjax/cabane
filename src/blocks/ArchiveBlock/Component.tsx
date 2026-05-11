@@ -20,6 +20,7 @@ export const ArchiveBlock: React.FC<
     populateBy,
     relationTo,
     selectedDocs,
+    sort,
   } = props
 
   const collection = relationTo || 'posts'
@@ -39,6 +40,7 @@ export const ArchiveBlock: React.FC<
       collection,
       depth: 1,
       limit,
+      sort: sort || '_order',
       ...(flattenedCategories && flattenedCategories.length > 0
         ? {
             where: {

@@ -33,6 +33,7 @@ import { slugField } from 'payload'
 
 export const Projects: CollectionConfig<'projects'> = {
   slug: 'projects',
+  orderable: true,
   access: {
     create: authenticated,
     delete: authenticated,
