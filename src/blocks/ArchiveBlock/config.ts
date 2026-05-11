@@ -81,6 +81,23 @@ export const Archive: Block = {
       label: 'Limit',
     },
     {
+      name: 'sort',
+      type: 'select',
+      admin: {
+        condition: (_, siblingData) => siblingData.populateBy === 'collection',
+      },
+      defaultValue: '_order',
+      label: 'Sort By',
+      options: [
+        { label: 'Manual order (drag in list view)', value: '_order' },
+        { label: 'Newest first', value: '-publishedAt' },
+        { label: 'Oldest first', value: 'publishedAt' },
+        { label: 'Title A–Z', value: 'title' },
+        { label: 'Title Z–A', value: '-title' },
+        { label: 'Recently updated', value: '-updatedAt' },
+      ],
+    },
+    {
       name: 'selectedDocs',
       type: 'relationship',
       admin: {

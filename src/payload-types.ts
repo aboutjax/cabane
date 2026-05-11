@@ -788,6 +788,7 @@ export interface Page {
  */
 export interface Post {
   id: number;
+  _order?: string | null;
   title: string;
   heroImage?: (number | null) | Media;
   content: {
@@ -1008,6 +1009,7 @@ export interface User {
  */
 export interface Project {
   id: number;
+  _order?: string | null;
   title: string;
   featuredImage: number | Media;
   content?: {
@@ -1198,6 +1200,7 @@ export interface ArchiveBlock {
   relationTo?: ('posts' | 'projects') | null;
   categories?: (number | Category)[] | null;
   limit?: number | null;
+  sort?: ('_order' | '-publishedAt' | 'publishedAt' | 'title' | '-title' | '-updatedAt') | null;
   selectedDocs?:
     | (
         | {
@@ -2195,6 +2198,7 @@ export interface ArchiveBlockSelect<T extends boolean = true> {
   relationTo?: T;
   categories?: T;
   limit?: T;
+  sort?: T;
   selectedDocs?: T;
   id?: T;
   blockName?: T;
@@ -2250,6 +2254,7 @@ export interface GalleryBlockSelect<T extends boolean = true> {
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   heroImage?: T;
   content?: T;
@@ -2281,6 +2286,7 @@ export interface PostsSelect<T extends boolean = true> {
  * via the `definition` "projects_select".
  */
 export interface ProjectsSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   featuredImage?: T;
   content?: T;
