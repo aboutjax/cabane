@@ -39,26 +39,48 @@ export const GalleryBlock: React.FC<GalleryBlockProps> = ({ layout, items }) => 
 
   const open = (index: number) => setOpenIndex(index)
 
-  const renderThumb = (item: Item, index: number, className?: string) => {
+  const renderThumb = (
+    item: Item,
+    index: number,
+    className?: string,
+    options?: { square?: boolean },
+  ) => {
     const media = resolveMedia(item)
     if (!media) return null
     const alt = resolveAlt(item, media)
+    const square = options?.square
     return (
       <button
         key={item.id || index}
         type="button"
         onClick={() => open(index)}
         className={cn(
-          'group block w-full overflow-hidden rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+          'group block w-full overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+          !square && 'rounded-md',
           className,
         )}
         aria-label={alt ? `Open image: ${alt}` : `Open image ${index + 1}`}
       >
-        <Media
-          resource={media}
-          alt={alt}
-          imgClassName="w-full h-auto transition-transform duration-300 group-hover:scale-[1.02]"
-        />
+        {square ? (
+          <div className="relative aspect-square w-full overflow-hidden rounded-md">
+            <Media
+              resource={
+                media.sizes?.square?.url
+                  ? { ...media, ...media.sizes.square }
+                  : media
+              }
+              fill
+              alt={alt}
+              imgClassName="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            />
+          </div>
+        ) : (
+          <Media
+            resource={media}
+            alt={alt}
+            imgClassName="w-full h-auto transition-transform duration-300 group-hover:scale-[1.02]"
+          />
+        )}
         {item.caption && (
           <span className="mt-2 block text-sm text-muted-foreground text-left">
             {item.caption}
@@ -71,8 +93,8 @@ export const GalleryBlock: React.FC<GalleryBlockProps> = ({ layout, items }) => 
   return (
     <div className="container py-12">
       {layout === 'grid' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {items.map((item, i) => renderThumb(item, i))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {items.map((item, i) => renderThumb(item, i, undefined, { square: true }))}
         </div>
       )}
 
