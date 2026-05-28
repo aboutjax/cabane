@@ -31,6 +31,7 @@ export const BlobHero: React.FC<Page['hero']> = ({ links, media, richText }) => 
             videoClassName="absolute inset-0 w-full h-full object-cover"
             priority
             resource={media}
+            size="100vw"
           />
         )}
       </div>
