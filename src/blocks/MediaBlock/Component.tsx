@@ -46,6 +46,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
           imgClassName={cn('border border-border', imgClassName)}
           resource={media}
           src={staticImage}
+          size="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
         />
       )}
       {caption && (

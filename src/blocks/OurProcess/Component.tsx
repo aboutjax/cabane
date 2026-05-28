@@ -73,7 +73,7 @@ export const OurProcessBlock: React.FC<OurProcessBlockProps> = ({ heading, subHe
                   {...fade(0.08)}
                 >
                   {step.image && typeof step.image !== 'number' && (
-                    <Media resource={step.image} fill imgClassName="object-cover" />
+                    <Media resource={step.image} fill imgClassName="object-cover" size="(max-width: 768px) 100vw, 50vw" />
                   )}
                 </motion.div>
               </div>
