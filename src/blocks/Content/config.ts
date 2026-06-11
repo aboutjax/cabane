@@ -10,6 +10,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { link } from '@/fields/link'
+import { Gallery } from '../Gallery/config'
 import { MediaBlock } from '../MediaBlock/config'
 
 const columnFields: Field[] = [
@@ -44,7 +45,7 @@ const columnFields: Field[] = [
         return [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-          BlocksFeature({ blocks: [MediaBlock] }),
+          BlocksFeature({ blocks: [MediaBlock, Gallery] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           HorizontalRuleFeature(),

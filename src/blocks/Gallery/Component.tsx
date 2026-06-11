@@ -20,7 +20,7 @@ const resolveMedia = (item: Item): MediaType | null => {
 const resolveAlt = (item: Item, media: MediaType | null) =>
   item.altOverride || media?.alt || ''
 
-export const GalleryBlock: React.FC<GalleryBlockProps> = ({ layout, items }) => {
+export const GalleryBlock: React.FC<GalleryBlockProps & { className?: string }> = ({ layout, items, className }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   if (!items || items.length === 0) return null
@@ -91,7 +91,7 @@ export const GalleryBlock: React.FC<GalleryBlockProps> = ({ layout, items }) => 
   }
 
   return (
-    <div className="container py-12">
+    <div className={className ?? 'container py-12'}>
       {layout === 'grid' && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {items.map((item, i) => renderThumb(item, i, undefined, { square: true }))}
