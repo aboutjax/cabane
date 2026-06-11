@@ -1453,7 +1453,7 @@ export interface OurProcessBlock {
  * via the `definition` "GalleryBlock".
  */
 export interface GalleryBlock {
-  layout: 'grid' | 'carousel' | 'masonry';
+  layout: 'grid' | 'carousel' | 'masonry' | 'fullWidthCarousel';
   items: {
     media: number | Media;
     caption?: string | null;

@@ -17,6 +17,7 @@ export const Gallery: Block = {
         { label: 'Grid', value: 'grid' },
         { label: 'Carousel', value: 'carousel' },
         { label: 'Masonry', value: 'masonry' },
+        { label: 'Full Width Carousel', value: 'fullWidthCarousel' },
       ],
     },
     {

@@ -22,6 +22,7 @@ const resolveAlt = (item: Item, media: MediaType | null) =>
 
 export const GalleryBlock: React.FC<GalleryBlockProps & { className?: string }> = ({ layout, items, className }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [carouselIndex, setCarouselIndex] = useState(0)
 
   if (!items || items.length === 0) return null
 
@@ -103,6 +104,68 @@ export const GalleryBlock: React.FC<GalleryBlockProps & { className?: string }> 
           {items.map((item, i) => renderThumb(item, i))}
         </div>
       )}
+
+      {layout === 'fullWidthCarousel' && (() => {
+        const current = items[carouselIndex]
+        const media = resolveMedia(current)
+        const alt = resolveAlt(current, media)
+        const prev = () => setCarouselIndex((i) => (i - 1 + items.length) % items.length)
+        const next = () => setCarouselIndex((i) => (i + 1) % items.length)
+        return (
+          <div className="w-full">
+            <div className="relative w-full">
+              <div className="relative w-full aspect-[4/3] sm:aspect-video overflow-hidden rounded-md bg-muted">
+                {media && (
+                  <button
+                    type="button"
+                    onClick={() => open(carouselIndex)}
+                    className="absolute inset-0 w-full h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    aria-label={alt ? `Open image: ${alt}` : `Open image ${carouselIndex + 1}`}
+                  >
+                    <Media
+                      resource={media.sizes?.xlarge?.url ? { ...media, ...media.sizes.xlarge } : media}
+                      fill
+                      alt={alt}
+                      imgClassName="object-contain"
+                    />
+                  </button>
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Previous image"
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 shadow-md backdrop-blur-sm transition-opacity hover:opacity-100 opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+                  <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Next image"
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 shadow-md backdrop-blur-sm transition-opacity hover:opacity-100 opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+                  <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="mt-3 flex items-start justify-between gap-4">
+              <span className="text-sm text-muted-foreground min-h-[1.25rem]">
+                {current.caption || ''}
+              </span>
+              <span className="shrink-0 text-sm text-muted-foreground tabular-nums">
+                {carouselIndex + 1} / {items.length}
+              </span>
+            </div>
+          </div>
+        )
+      })()}
 
       {layout === 'carousel' && (
         <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4">
