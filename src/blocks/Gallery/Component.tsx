@@ -60,7 +60,6 @@ export const GalleryBlock: React.FC<GalleryBlockProps & { className?: string }> 
         onClick={() => open(index)}
         className={cn(
           'group block w-full overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-          !square && 'rounded-md',
           className,
         )}
         aria-label={alt ? `Open image: ${alt}` : `Open image ${index + 1}`}
@@ -75,11 +74,13 @@ export const GalleryBlock: React.FC<GalleryBlockProps & { className?: string }> 
             />
           </div>
         ) : (
-          <Media
-            resource={media}
-            alt={alt}
-            imgClassName="w-full h-auto transition-transform duration-300 group-hover:scale-[1.02]"
-          />
+          <div className="overflow-hidden rounded-md">
+            <Media
+              resource={media}
+              alt={alt}
+              imgClassName="w-full h-auto transition-transform duration-300 group-hover:scale-[1.02]"
+            />
+          </div>
         )}
         {item.caption && (
           <span className="mt-2 block text-sm text-muted-foreground text-left">{item.caption}</span>
