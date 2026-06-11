@@ -46,18 +46,6 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
 
   if (!project) return <PayloadRedirects url={url} />
 
-  const featuredImage = project.featuredImage as MediaType | undefined
-  const featuredImageProps =
-    featuredImage && typeof featuredImage !== 'string' && featuredImage.url
-      ? {
-          src: featuredImage.url,
-          alt: featuredImage.alt || '',
-          width: featuredImage.width || 1920,
-          height: featuredImage.height || 1080,
-          blurDataURL: featuredImage.blurDataURL || undefined,
-        }
-      : null
-
   return (
     <article>
       <PayloadRedirects disableNotFound url={url} />
@@ -65,7 +53,7 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
       {draft && <LivePreviewListener />}
 
       {/* Project Header */}
-      <div className="pt-40 px-6 sm:px-8 pb-8 text-balance">
+      <div className="pt-40 px-6 sm:px-8 pb-8 text-balance border-b border-border">
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-10">
           {project.title}
         </h1>
@@ -132,36 +120,6 @@ export default async function ProjectPage({ params: paramsPromise }: Args) {
           )}
         </div>
       </div>
-
-      {/* Featured Image - Full Bleed */}
-      {featuredImageProps && (
-        <div className="aspect-video w-full bg-black flex items-center justify-center overflow-hidden relative">
-          <Image
-            {...featuredImageProps}
-            {...(featuredImageProps.blurDataURL && {
-              placeholder: 'blur' as const,
-              blurDataURL: featuredImageProps.blurDataURL,
-            })}
-            quality={50}
-            sizes="100vw"
-            aria-hidden
-            className="absolute inset-0 blur-3xl brightness-40 h-full w-full scale-160"
-          />
-          <div className="relative h-full">
-            <Image
-              {...featuredImageProps}
-              {...(featuredImageProps.blurDataURL && {
-                placeholder: 'blur' as const,
-                blurDataURL: featuredImageProps.blurDataURL,
-              })}
-              quality={100}
-              sizes="100vw"
-              priority
-              className="h-full w-auto object-contain"
-            />
-          </div>
-        </div>
-      )}
 
       {/* Content */}
       {project.content && !isLexicalEmpty(project.content) && (

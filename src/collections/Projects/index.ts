@@ -93,7 +93,7 @@ export const Projects: CollectionConfig<'projects'> = {
                   return [
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [MediaBlock] }),
+                    BlocksFeature({ blocks: [MediaBlock, Gallery] }),
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
